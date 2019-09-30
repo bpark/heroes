@@ -1,2 +1,2 @@
-# ml-demos
-Machine Learning Demos with python
+# heroes
+Simple flask based microservice.

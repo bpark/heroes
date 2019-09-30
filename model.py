@@ -1,3 +1,5 @@
+import time
+
 def auto_str(cls):
     def __str__(self):
         return '%s(%s)' % (
@@ -11,12 +13,18 @@ def auto_str(cls):
 
 @auto_str
 class Hero:
+    _id_c = 0
 
-    def __init__(self, rid: int, name: str, strength: int) -> None:
+    def __init__(self, name: str, strength: int) -> None:
         super().__init__()
-        self.rid = rid
+        self.rid = Hero._id_c
         self.name = name
         self.strength = strength
+        self.mission_id = None
+        Hero._id_c += 1
+
+    def set_mission(self, mission_id: int):
+        self.mission_id = mission_id
 
     def serialize(self):
         return {
@@ -28,17 +36,24 @@ class Hero:
 
 @auto_str
 class Mission:
+    _id_c = 0
 
-    def __init__(self, rid: int, name: str, difficulty: int) -> None:
+    def __init__(self, name: str, difficulty: int, duration: int, expires: int) -> None:
         super().__init__()
-        self.rid = rid
+        self.rid = Mission._id_c
         self.name = name
         self.difficulty = difficulty
         self.running = False
         self.hero_ids = []
+        self.duration = duration
+        self.expires = expires
+        self.finish = None
+        Mission._id_c += 1
 
     def start(self, hero_ids: []):
         self.hero_ids = hero_ids
+        self.finish = time.time() + self.duration
+        self.expires = None
 
     def serialize(self):
         return {
@@ -46,5 +61,7 @@ class Mission:
             "name": self.name,
             "difficulty": self.difficulty,
             "running": self.running,
+            "expires": self.expires,
+            "duration": self.duration,
             "heroes": self.hero_ids
         }
