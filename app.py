@@ -3,10 +3,12 @@ from atexit import register
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, escape, request, Response, json
+from flask_cors import CORS
 from random import randint
 from model import Hero, Mission
 
 app = Flask(__name__)
+CORS(app)
 
 heroes = [Hero("A" + str(x), randint(10, 100)) for x in range(5)]
 
