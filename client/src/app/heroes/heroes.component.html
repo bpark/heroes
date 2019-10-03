@@ -1,0 +1,22 @@
+<div class="container">
+
+<h1>Heroes</h1>
+
+<table class="table table-striped" *ngIf="heroes !== null">
+  <thead>
+  <tr>
+    <th class="label-table" scope="col">Id</th>
+    <th class="label-table" scope="col">Name</th>
+    <th class="label-table" scope="col">Strength</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let hero of heroes">
+    <th class="label-content-table" scope="row">{{hero.id}}</th>
+    <td class="label-content-table">{{hero.name}}</td>
+    <td class="label-content-table">{{hero.strength}}</td>
+  </tr>
+  </tbody>
+</table>
+
+</div>

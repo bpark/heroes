@@ -1,0 +1,24 @@
+<div class="container">
+
+<h1>Missions</h1>
+
+<table class="table table-striped" *ngIf="missions !== null">
+  <thead>
+  <tr>
+    <th class="label-table" scope="col">Id</th>
+    <th class="label-table" scope="col">Name</th>
+    <th class="label-table" scope="col">Difficulty</th>
+    <th class="label-table" scope="col">Expires</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let mission of missions">
+    <th class="label-content-table" scope="row">{{mission.id}}</th>
+    <td class="label-content-table">{{mission.name}}</td>
+    <td class="label-content-table">{{mission.difficulty}}</td>
+    <td class="label-content-table">{{mission.expires}}</td>
+  </tr>
+  </tbody>
+</table>
+
+</div>

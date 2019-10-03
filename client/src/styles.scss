@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootswatch/dist/cyborg/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cyborg/bootswatch";
+
+body {
+  background-image: url("assets/leather2.png");
+  background-repeat: repeat;
+}
+
+.heroes path {
+//    fill: #0148ff;
+//    fill: rgb(235, 222, 194);
+    fill: rgb(0, 180, 40);
+}
+
+.missions path {
+//    fill: #0148ff;
+//    fill: rgb(235, 222, 194);
+    fill: rgb(180, 0, 40);
+}
+
+.label-table {
+  color: #f8b700;
+//  text-align: center;
+  font-family: "Semplicita Pro","Open Sans",Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.label-content-table {
+  color: rgb(235, 222, 194);
+}
