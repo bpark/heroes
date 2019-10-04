@@ -35,6 +35,7 @@ export class HeroesComponent implements OnInit {
 
   ok(): void {
     this.heroes.filter(h => h.selected).forEach(h => this.heroAssignmentState.heroIds.push(h.id));
+    console.log("pushing back");
     this.location.back();
   }
 }

@@ -28,10 +28,10 @@
     </tr>
     <tr>
       <td colspan="2">
-        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
-        <img class="portrait" src="../../assets/p0_128x128.png">
-        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
-        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
+        <ng-container *ngFor="let slot of slots">
+          <span *ngIf="slot == null" class="slot" routerLink="/heroes" routerLinkActive="active"></span>
+          <img *ngIf="slot != null" class="portrait" src="../../assets/p0_128x128.png">
+        </ng-container>
       </td>
     </tr>
     </tbody>

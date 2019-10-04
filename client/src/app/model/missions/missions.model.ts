@@ -7,5 +7,5 @@ export class Mission {
   difficulty: number = null;
   duration: number = null;
   expires: number = null;
-  heroes: number[] = null;
+  heroes: number[] = [];
 }
