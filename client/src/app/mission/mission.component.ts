@@ -29,7 +29,9 @@ export class MissionComponent implements OnInit {
         this.missionsRepository.get(id).subscribe(result => {
           this.mission = result;
           this.heroAssignmentState.missionId = id;
-          this.mission.heroes = this.heroAssignmentState.heroIds;
+          if (this.heroAssignmentState.heroIds.length > 0) {
+            this.mission.heroes = this.heroAssignmentState.heroIds;
+          }
           this.slots.push.apply(this.slots, this.mission.heroes);
           console.log("current slots: " + this.slots.length);
           while (this.slots.length < 3) {
@@ -38,7 +40,11 @@ export class MissionComponent implements OnInit {
           }
         });
       }
-    })
+    });
+  }
+
+  start(): void {
+    this.missionsRepository.startMission(this.mission.id, this.heroAssignmentState.heroIds).subscribe();
   }
 
 }

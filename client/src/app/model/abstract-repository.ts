@@ -15,7 +15,7 @@ export class AbstractRepository<T> {
     return this.http.get<T>(this.createConnectionUrl(id), {});
   }
 
-  private createConnectionUrl(id?: number): string {
+  protected createConnectionUrl(id?: number|string): string {
     if (!environment.production) {
       if (id) {
         return 'http://localhost:5000/' + this.apiUrl + '/' + id;
