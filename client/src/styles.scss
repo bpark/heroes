@@ -6,6 +6,26 @@
 body {
   background-image: url("assets/leather2.png");
   background-repeat: repeat;
+  //margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  //height: 60px; /* Set the fixed height of the footer here */
+  //line-height: 60px; /* Vertically center the text there */
+  //background-color: rgba(84, 35, 23, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.home path {
+    fill: rgb(40, 0, 180);
 }
 
 .heroes path {
@@ -20,6 +40,27 @@ body {
     fill: rgb(180, 0, 40);
 }
 
+.heroes-div {
+//  background-color: rgba(179,61,38,.5);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(91, 29, 17, 0.2), 0 6px 20px 0 rgba(91, 29, 17, 0.19);
+}
+
+.heroes-div:hover {
+//  background-color: rgba(238, 74, 41, 0.5);
+  //background-color: rgba(91, 29, 17, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(235, 222, 194, 0.2), 0 6px 20px 0 rgba(235, 222, 194, 0.19);
+}
+
+.dynamicTile {
+    padding:15px;
+}
+
+.dynamicTile {
+    padding:15px;
+}
+
 .label-table {
   color: #f8b700;
 //  text-align: center;
@@ -30,4 +71,5 @@ body {
 
 .label-content-table {
   color: rgb(235, 222, 194);
+  cursor:pointer;
 }

@@ -1,0 +1,40 @@
+<main role="main" class="container" *ngIf="mission !== null">
+
+  <h1>{{mission.name}}</h1>
+
+  <table class="table table-full">
+    <!-- <thead>
+     <tr>
+       <th class="label-table" scope="col">Id</th>
+       <th class="label-table" scope="col">Name</th>
+     </tr>
+     </thead>-->
+    <tbody>
+    <tr>
+      <th class="label-table" scope="row">Name</th>
+      <td class="label-content-table">The missions name is {{mission.name}}</td>
+    </tr>
+    <tr>
+      <th class="label-table" scope="row">Difficulty</th>
+      <td class="label-content-table">{{mission.difficulty}}</td>
+    </tr>
+    <tr>
+      <th class="label-table" scope="row">Duration</th>
+      <td class="label-content-table">{{mission.duration}}</td>
+    </tr>
+    <tr>
+      <th class="label-table" scope="row">Expires</th>
+      <td class="label-content-table">{{mission.expires}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
+        <img class="portrait" src="../../assets/p0_128x128.png">
+        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
+        <span class="slot" routerLink="/heroes" routerLinkActive="active"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</main>

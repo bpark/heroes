@@ -6,7 +6,7 @@ import {Hero} from "./heroes.model";
 @Injectable({
   providedIn: 'root'
 })
-export class HeroesRepositoryService extends AbstractRepository<Hero[]> {
+export class HeroesRepositoryService extends AbstractRepository<Hero> {
 
   private static readonly apiPath = 'heroes';
 

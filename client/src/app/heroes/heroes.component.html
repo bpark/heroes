@@ -1,4 +1,4 @@
-<div class="container">
+<main role="main" class="container">
 
 <h1>Heroes</h1>
 
@@ -6,17 +6,23 @@
   <thead>
   <tr>
     <th class="label-table" scope="col">Id</th>
+    <th class="label-table" scope="col"></th>
     <th class="label-table" scope="col">Name</th>
     <th class="label-table" scope="col">Strength</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let hero of heroes">
+  <tr *ngFor="let hero of heroes; let i = index"
+      (click)="selectionMode ? select(hero.id) : ''"
+      [ngClass]="hero.selected? 'selected' : ''">
     <th class="label-content-table" scope="row">{{hero.id}}</th>
+    <td class="label-content-table"><img class="portrait" src="../../assets/p0_128x128.png"></td>
     <td class="label-content-table">{{hero.name}}</td>
     <td class="label-content-table">{{hero.strength}}</td>
   </tr>
   </tbody>
 </table>
 
-</div>
+<button *ngIf="selectionMode" type="button" class="btn btn-warning">Ok</button>
+
+</main>

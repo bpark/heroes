@@ -7,8 +7,12 @@ export class AbstractRepository<T> {
   constructor(protected http: HttpClient, private apiUrl: string) {
   }
 
-  list(): Observable<T> {
-    return this.http.get<T>(this.createConnectionUrl(), {});
+  list(): Observable<T[]> {
+    return this.http.get<T[]>(this.createConnectionUrl(), {});
+  }
+
+  get(id: number): Observable<T> {
+    return this.http.get<T>(this.createConnectionUrl(id), {});
   }
 
   private createConnectionUrl(id?: number): string {

@@ -12,8 +12,9 @@ CORS(app)
 
 heroes = [Hero("A" + str(x), randint(10, 100)) for x in range(5)]
 
-duration = randint(30, 60)
-expires = time() + randint(30, 60)
+# seconds
+duration = randint(30 * 600, 60 * 600)
+expires = time() + randint(30 * 600, 60 * 600)
 missions = [Mission("M" + str(x), randint(40, 100), duration, expires) for x in range(7)]
 
 
@@ -51,6 +52,15 @@ def get_heroes():
 @app.route("/missions")
 def get_missions():
     serialized = [e.serialize() for e in missions]
+    js = json.dumps(serialized)
+    resp = Response(js, status=200, mimetype='application/json')
+    return resp
+
+
+@app.route("/missions/<rid>")
+def get_mission(rid):
+    print("searching for mission: " + rid)
+    serialized = next(e.serialize() for e in missions if e.rid == int(rid))
     js = json.dumps(serialized)
     resp = Response(js, status=200, mimetype='application/json')
     return resp

@@ -8,6 +8,8 @@ import {MissionsComponent} from './missions/missions.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './home/home.component';
 import {HeroesComponent} from './heroes/heroes.component';
+import { FooterComponent } from './footer/footer.component';
+import { MissionComponent } from './mission/mission.component';
 
 const appRoutes: Routes = [
 //  { path: 'crisis-center', component: CrisisListComponent },
@@ -15,6 +17,10 @@ const appRoutes: Routes = [
   {
     path: 'heroes',
     component: HeroesComponent,
+  },
+  {
+    path: 'missions/:id',
+    component: MissionComponent,
   },
   {
     path: 'missions',
@@ -37,7 +43,9 @@ const appRoutes: Routes = [
     AppComponent,
     MissionsComponent,
     HomeComponent,
-    HeroesComponent
+    HeroesComponent,
+    FooterComponent,
+    MissionComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +53,7 @@ const appRoutes: Routes = [
     InlineSVGModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true} // <-- debugging purposes only
+      {enableTracing: false} // <-- debugging purposes only
     )
   ],
   providers: [],

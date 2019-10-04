@@ -6,7 +6,7 @@ import {AbstractRepository} from "../abstract-repository";
 @Injectable({
   providedIn: 'root'
 })
-export class MissionsRepositoryService extends AbstractRepository<Mission[]> {
+export class MissionsRepositoryService extends AbstractRepository<Mission> {
 
   private static readonly apiPath = 'missions';
 

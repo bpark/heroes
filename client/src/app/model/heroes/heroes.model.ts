@@ -4,4 +4,5 @@ export class Hero {
   id: number = null;
   name: string = null;
   strength: number = null;
+  selected: boolean = false;
 }

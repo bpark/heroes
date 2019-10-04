@@ -1,4 +1,4 @@
-<div class="container">
+<main role="main" class="container">
 
 <h1>Missions</h1>
 
@@ -8,17 +8,17 @@
     <th class="label-table" scope="col">Id</th>
     <th class="label-table" scope="col">Name</th>
     <th class="label-table" scope="col">Difficulty</th>
-    <th class="label-table" scope="col">Expires</th>
+    <th class="label-table" scope="col">Duration</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let mission of missions">
+  <tr *ngFor="let mission of missions" [routerLink]="['/missions', mission.id]" routerLinkActive="active">
     <th class="label-content-table" scope="row">{{mission.id}}</th>
     <td class="label-content-table">{{mission.name}}</td>
     <td class="label-content-table">{{mission.difficulty}}</td>
-    <td class="label-content-table">{{mission.expires}}</td>
+    <td class="label-content-table">{{mission.duration}}</td>
   </tr>
   </tbody>
 </table>
 
-</div>
+</main>
