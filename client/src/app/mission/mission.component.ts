@@ -33,6 +33,7 @@ export class MissionComponent implements OnInit {
           if (this.heroAssignmentState.heroIds.length > 0) {
             this.mission.heroes = this.heroAssignmentState.heroIds;
           }
+          this.slots = [];
           this.slots.push.apply(this.slots, this.mission.heroes);
           console.log("current slots: " + this.slots.length);
           while (this.slots.length < this.mission.slots) {

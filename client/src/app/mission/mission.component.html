@@ -30,7 +30,7 @@
       <td colspan="2">
         <ng-container *ngFor="let slot of slots">
           <span *ngIf="slot == null" class="slot" routerLink="/heroes" routerLinkActive="active"></span>
-          <img *ngIf="slot != null" class="portrait" src="../../assets/p0_128x128.png">
+          <img *ngIf="slot != null" class="portrait" src="../../assets/p0_128x128.png" routerLink="/heroes" routerLinkActive="active">
         </ng-container>
       </td>
     </tr>
