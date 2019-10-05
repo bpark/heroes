@@ -1,15 +1,15 @@
 <div class="container dynamicTile">
 
-  <div class="row">
-    <div class="col-sm-4 col-xs-2">
-      <a [routerLink]="['/missions']" [queryParams]="{ running: 'false'}">
-        <div class="missions heroes-div" [inlineSVG]="'assets/crossed-swords.svg'" ></div>
-      </a>
-    </div>
-    <div class="col-sm-4 col-xs-2">
-      <a routerLink="/heroes">
-        <div class="heroes heroes-div" [inlineSVG]="'assets/visored-helm.svg'" ></div>
-      </a>
-    </div>
+  <div class="centered">
+
+    <a [routerLink]="['/missions']" [queryParams]="{ running: 'false'}">
+      <div class="missions heroes-div home-btn" [inlineSVG]="'assets/crossed-swords.svg'"></div>
+    </a>
+
+    <a routerLink="/heroes">
+      <div class="heroes heroes-div home-btn" [inlineSVG]="'assets/visored-helm.svg'"></div>
+    </a>
+
   </div>
+
 </div>

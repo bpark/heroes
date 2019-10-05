@@ -3,4 +3,16 @@
 //    fill: red;
 //}
 
+.home-btn {
+  display: inline-block;
+  width: 8rem;
+  //float: left;
+  height: 8rem;
+  margin: .5rem;
+  border-color: rgba(91, 29, 17, 1.0);
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 0 4px 8px 0 rgba(91, 29, 17, 0.2), 0 6px 20px 0 rgba(91, 29, 17, 0.19);
+}
 
+.centered{ display: table; margin: 0 auto; }
