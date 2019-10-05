@@ -34,7 +34,7 @@ export class MissionComponent implements OnInit {
           }
           this.slots.push.apply(this.slots, this.mission.heroes);
           console.log("current slots: " + this.slots.length);
-          while (this.slots.length < 3) {
+          while (this.slots.length < this.mission.slots) {
             console.log("pushing null");
             this.slots.push(null);
           }
@@ -45,6 +45,7 @@ export class MissionComponent implements OnInit {
 
   start(): void {
     this.missionsRepository.startMission(this.mission.id, this.heroAssignmentState.heroIds).subscribe();
+    this.location.back();
   }
 
 }

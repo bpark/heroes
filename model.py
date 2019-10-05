@@ -1,5 +1,6 @@
 import time
 
+
 def auto_str(cls):
     def __str__(self):
         return '%s(%s)' % (
@@ -48,6 +49,7 @@ class Mission:
         self.duration = duration
         self.expires = expires
         self.finish = None
+        self.slots = 3
         Mission._id_c += 1
 
     def start(self, hero_ids: []):
@@ -63,5 +65,6 @@ class Mission:
             "running": self.running,
             "expires": self.expires,
             "duration": self.duration,
+            "slots": self.slots,
             "heroes": self.hero_ids
         }
