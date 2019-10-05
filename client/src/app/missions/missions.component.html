@@ -2,6 +2,21 @@
 
 <h1>Missions</h1>
 
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link"
+       [ngClass]="{'active': !running}"
+       [routerLink]="['/missions']"
+       [queryParams]="{ running: 'false'}">Available</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+       [ngClass]="{'active': running}"
+       [routerLink]="['/missions']"
+       [queryParams]="{ running: 'true'}">Running</a>
+  </li>
+</ul>
+
 <table class="table table-striped" *ngIf="missions !== null">
   <thead>
   <tr>
@@ -12,7 +27,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let mission of missions" [routerLink]="['/missions', mission.id]" routerLinkActive="active">
+  <tr *ngFor="let mission of missions" [routerLink]="['/missions', mission.id]">
     <th class="label-content-table" scope="row">{{mission.id}}</th>
     <td class="label-content-table">{{mission.name}}</td>
     <td class="label-content-table">{{mission.difficulty}}</td>

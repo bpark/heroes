@@ -29,14 +29,21 @@
     <tr>
       <td colspan="2">
         <ng-container *ngFor="let slot of slots">
-          <span *ngIf="slot == null" class="slot" routerLink="/heroes" routerLinkActive="active"></span>
-          <img *ngIf="slot != null" class="portrait" src="../../assets/p0_128x128.png" routerLink="/heroes" routerLinkActive="active">
+          <span *ngIf="slot == null"
+                class="slot"
+                [ngClass]="{'disabled': mission.running}"
+                routerLink="/heroes"></span>
+          <img *ngIf="slot != null"
+               class="portrait disabled"
+               [ngClass]="{'disabled': mission.running}"
+               src="../../assets/p0_128x128.png"
+               routerLink="/heroes">
         </ng-container>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <button type="button" class="btn btn-warning" (click)="start()">Start</button>
+  <button *ngIf="!mission.running" type="button" class="btn btn-warning" (click)="start()">Start</button>
 
 </main>

@@ -56,6 +56,7 @@ class Mission:
         self.hero_ids = hero_ids
         self.finish = time.time() + self.duration
         self.expires = None
+        self.running = True
 
     def serialize(self):
         return {
