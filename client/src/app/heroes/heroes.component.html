@@ -2,6 +2,8 @@
 
 <h1>Heroes</h1>
 
+<div class="scroll">
+
 <table class="table table-striped" *ngIf="heroes !== null">
   <thead>
   <tr>
@@ -12,17 +14,21 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let hero of heroes; let i = index"
+  <tr *ngFor="let hero of heroes"
       (click)="selectionMode ? select(hero.id) : ''"
       [ngClass]="hero.selected? 'selected' : ''">
-    <th class="label-content-table" scope="row">{{hero.id}}</th>
-    <td class="label-content-table"><img class="portrait" src="../../assets/p0_128x128.png"></td>
-    <td class="label-content-table">{{hero.name}}</td>
-    <td class="label-content-table">{{hero.strength}}</td>
+    <ng-container *ngIf="!selectionMode || hero.missionId === null">
+      <th class="label-content-table" scope="row">{{hero.id}}</th>
+      <td class="label-content-table"><img class="portrait" src="../../assets/p0_128x128.png"></td>
+      <td class="label-content-table">{{hero.name}}</td>
+      <td class="label-content-table">{{hero.strength}}</td>
+    </ng-container>
   </tr>
   </tbody>
 </table>
 
 <button *ngIf="selectionMode" type="button" class="btn btn-warning" (click)="ok()">Ok</button>
+
+</div>
 
 </main>

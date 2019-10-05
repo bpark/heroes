@@ -31,7 +31,8 @@ class Hero:
         return {
             "id": self.rid,
             "name": self.name,
-            "strength": self.strength
+            "strength": self.strength,
+            "missionId": self.mission_id
         }
 
 

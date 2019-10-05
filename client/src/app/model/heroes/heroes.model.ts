@@ -4,5 +4,6 @@ export class Hero {
   id: number = null;
   name: string = null;
   strength: number = null;
+  missionId: number = null;
   selected: boolean = false;
 }

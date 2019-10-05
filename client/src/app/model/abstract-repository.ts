@@ -1,14 +1,26 @@
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {environment} from "../../environments/environment";
+import {EntityCacheService} from "./entity-cache.service";
+import {tap} from "rxjs/operators";
 
 export class AbstractRepository<T> {
 
-  constructor(protected http: HttpClient, private apiUrl: string) {
+  constructor(protected http: HttpClient,
+              protected entityCache: EntityCacheService,
+              private apiUrl: string) {
   }
 
   list(): Observable<T[]> {
-    return this.http.get<T[]>(this.createConnectionUrl(), {});
+    const items = this.entityCache.getItems<T>(this.apiUrl);
+    if (items) {
+      return of(items);
+    } else {
+      return this.http.get<T[]>(this.createConnectionUrl(), {}).pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        tap(data => this.entityCache.putItems(this.apiUrl, data))
+      );
+    }
   }
 
   get(id: number): Observable<T> {

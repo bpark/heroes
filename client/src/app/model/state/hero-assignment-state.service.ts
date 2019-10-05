@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,12 @@ export class HeroAssignmentStateService {
   slots: number = null;
 
   constructor() { }
+
+  reset(): void {
+    this.missionId = null;
+    this.heroIds = [];
+    this.slots = null;
+  }
 
   get missionId(): number {
     return this._missionId;

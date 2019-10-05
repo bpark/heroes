@@ -8,8 +8,9 @@ import {MissionsComponent} from './missions/missions.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './home/home.component';
 import {HeroesComponent} from './heroes/heroes.component';
-import { FooterComponent } from './footer/footer.component';
-import { MissionComponent } from './mission/mission.component';
+import {FooterComponent} from './footer/footer.component';
+import {MissionComponent} from './mission/mission.component';
+import {EntityCacheService} from "./model/entity-cache.service";
 
 const appRoutes: Routes = [
 //  { path: 'crisis-center', component: CrisisListComponent },
@@ -21,6 +22,10 @@ const appRoutes: Routes = [
   {
     path: 'missions/:id',
     component: MissionComponent,
+  },
+  {
+    path: 'missions/:id/heroes',
+    component: HeroesComponent,
   },
   {
     path: 'missions',
@@ -56,7 +61,7 @@ const appRoutes: Routes = [
       {enableTracing: false} // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [EntityCacheService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
