@@ -30,7 +30,12 @@ export class HeroesComponent implements OnInit {
   select(id: number): void {
     console.log("selecting: " + id);
     const selectedHero = this.heroes.find(h => h.id === id);
-    selectedHero.selected = !selectedHero.selected;
+    selectedHero.selected = !selectedHero.selected && (selectedHero.selected || this.canSelect());
+  }
+
+  canSelect() {
+    const selectedCount = this.heroes.filter(h => h.selected).length;
+    return selectedCount < this.heroAssignmentState.slots;
   }
 
   ok(): void {

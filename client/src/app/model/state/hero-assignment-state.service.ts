@@ -7,6 +7,7 @@ export class HeroAssignmentStateService {
 
   private _missionId: number = null;
   heroIds: number[] = [];
+  slots: number = null;
 
   constructor() { }
 

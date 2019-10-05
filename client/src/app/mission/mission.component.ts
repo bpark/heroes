@@ -29,6 +29,7 @@ export class MissionComponent implements OnInit {
         this.missionsRepository.get(id).subscribe(result => {
           this.mission = result;
           this.heroAssignmentState.missionId = id;
+          this.heroAssignmentState.slots = this.mission.slots;
           if (this.heroAssignmentState.heroIds.length > 0) {
             this.mission.heroes = this.heroAssignmentState.heroIds;
           }
