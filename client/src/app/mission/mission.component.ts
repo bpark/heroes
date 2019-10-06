@@ -3,6 +3,7 @@ import {MissionsRepositoryService} from "../model/missions/missions-repository.s
 import {ActivatedRoute, Router} from "@angular/router";
 import {Mission} from "../model/missions/missions.model";
 import {HeroAssignmentStateService} from "../model/state/hero-assignment-state.service";
+import {MissionNameGeneratorService} from "../model/missions/mission-name-generator.service";
 
 @Component({
   selector: 'app-mission',
@@ -17,7 +18,8 @@ export class MissionComponent implements OnInit {
   constructor(private missionsRepository: MissionsRepositoryService,
               private activeRoute: ActivatedRoute,
               private heroAssignmentState: HeroAssignmentStateService,
-              private router: Router) {
+              private router: Router,
+              private missionNameGenerator: MissionNameGeneratorService) {
   }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class MissionComponent implements OnInit {
         console.log(id);
         this.missionsRepository.get(id).subscribe(result => {
           this.mission = result;
+          this.mission.name = this.missionNameGenerator.generate(this.mission.id);
           this.heroAssignmentState.missionId = id;
           this.heroAssignmentState.slots = this.mission.slots;
 
