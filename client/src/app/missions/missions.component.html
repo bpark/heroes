@@ -5,15 +5,15 @@
 <ul class="nav nav-pills">
   <li class="nav-item">
     <a class="nav-link"
-       [ngClass]="{'active': !running}"
+       [ngClass]="{'active': state == 'Available'}"
        [routerLink]="['/missions']"
-       [queryParams]="{ running: 'false'}">Available</a>
+       [queryParams]="{ state: 'Available'}">Available</a>
   </li>
   <li class="nav-item">
     <a class="nav-link"
-       [ngClass]="{'active': running}"
+       [ngClass]="{'active': state == 'Started'}"
        [routerLink]="['/missions']"
-       [queryParams]="{ running: 'true'}">Running</a>
+       [queryParams]="{ state: 'Started'}">Running</a>
   </li>
 </ul>
 

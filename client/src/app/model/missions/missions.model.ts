@@ -3,10 +3,16 @@
 export class Mission {
   id: number = null;
   name: string = null;
-  running: boolean = null;
+  state: MissionState = null;
   difficulty: number = null;
   duration: number = null;
   expires: number = null;
   slots: number = null;
   heroes: number[] = [];
+}
+
+export enum MissionState {
+    Available = "Available",
+    Started = "Started",
+    Finished = "Finished"
 }

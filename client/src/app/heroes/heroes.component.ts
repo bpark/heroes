@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from "../model/heroes/heroes.model";
 import {HeroesRepositoryService} from "../model/heroes/heroes-repository.service";
 import {HeroAssignmentStateService} from "../model/state/hero-assignment-state.service";
 import {Location} from "@angular/common";
+import NameGen from "../model/namegen";
 
 @Component({
   selector: 'app-heroes',
@@ -21,6 +22,11 @@ export class HeroesComponent implements OnInit {
   ngOnInit() {
     this.heroRepository.list().subscribe(result => {
       this.heroes = result;
+      let generator = new NameGen.Generator(NameGen.FANTASY_N_L);
+      this.heroes.forEach(h => {
+        let name = generator.toString();
+        h.name = name.charAt(0).toUpperCase() + name.slice(1);
+      });
       this.selectionMode = this.heroAssignmentState.missionId != null;
       console.log("selectionMode: " + this.selectionMode);
       console.log(result)

@@ -28,9 +28,9 @@ def schedule_missions():
     print(strftime("%A, %d. %B %Y %I:%M:%S %p"))
     expired_missions = [x for x in missions if x.expires is not None and x.expires <= time()]
     [print("expired mission: " + str(x.rid)) for x in expired_missions]
-    finished_missions = [x for x in missions if x.finish is not None and x.finish <= time()]
+    # finished_missions = [x for x in missions if x.finish is not None and x.finish <= time()]
     [missions.remove(x) for x in expired_missions]
-    new_mission_len = len(expired_missions) + len(finished_missions)
+    new_mission_len = len(expired_missions)
     print("new missions length: " + str(new_mission_len))
     for x in range(new_mission_len):
         m = Mission(name="M" + str(x),

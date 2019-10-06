@@ -45,7 +45,7 @@ class Mission:
         self.rid = Mission._id_c
         self.name = name
         self.difficulty = difficulty
-        self.running = False
+        self.state = "Available"
         self.hero_ids = []
         self.duration = duration
         self.expires = expires
@@ -57,14 +57,14 @@ class Mission:
         self.hero_ids = hero_ids
         self.finish = time.time() + self.duration
         self.expires = None
-        self.running = True
+        self.state = "Running"
 
     def serialize(self):
         return {
             "id": self.rid,
             "name": self.name,
             "difficulty": self.difficulty,
-            "running": self.running,
+            "state": self.state,
             "expires": self.expires,
             "duration": self.duration,
             "slots": self.slots,

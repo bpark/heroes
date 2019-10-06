@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MissionsRepositoryService} from "../model/missions/missions-repository.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Mission} from "../model/missions/missions.model";
+import {Mission, MissionState} from "../model/missions/missions.model";
 import {HeroAssignmentStateService} from "../model/state/hero-assignment-state.service";
 import {MissionNameGeneratorService} from "../model/missions/mission-name-generator.service";
 
@@ -13,6 +13,7 @@ import {MissionNameGeneratorService} from "../model/missions/mission-name-genera
 export class MissionComponent implements OnInit {
 
   mission: Mission = null;
+  editable: boolean = false;
   slots: number[] = [];
 
   constructor(private missionsRepository: MissionsRepositoryService,
@@ -32,6 +33,7 @@ export class MissionComponent implements OnInit {
         console.log(id);
         this.missionsRepository.get(id).subscribe(result => {
           this.mission = result;
+          this.editable = this.mission.state === MissionState.Available;
           this.mission.name = this.missionNameGenerator.generate(this.mission.id);
           this.heroAssignmentState.missionId = id;
           this.heroAssignmentState.slots = this.mission.slots;
@@ -46,7 +48,10 @@ export class MissionComponent implements OnInit {
 
   start(): void {
     this.missionsRepository.startMission(this.mission.id, this.heroAssignmentState.heroIds).subscribe(
-      success => this.router.navigate(['/missions'], {queryParams: {'running': false}}).then()
+      success => {
+        const extras = {queryParams: {'state': MissionState.Available}};
+        this.router.navigate(['/missions'], extras).then()
+      }
     );
   }
 

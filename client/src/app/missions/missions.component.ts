@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MissionsRepositoryService} from "../model/missions/missions-repository.service";
-import {Mission} from "../model/missions/missions.model";
+import {Mission, MissionState} from "../model/missions/missions.model";
 import {ActivatedRoute} from "@angular/router";
 import {MissionNameGeneratorService} from "../model/missions/mission-name-generator.service";
 
@@ -12,7 +12,7 @@ import {MissionNameGeneratorService} from "../model/missions/mission-name-genera
 export class MissionsComponent implements OnInit {
 
   missions: Mission[] = null;
-  running: boolean = false;
+  state: MissionState = MissionState.Available;
 
   constructor(private missionsRepository: MissionsRepositoryService,
               private activeRoute: ActivatedRoute,
@@ -21,12 +21,13 @@ export class MissionsComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe(params => {
-      this.running = (params["running"] == "true");
+      this.state = params["state"];
+      console.log("set to state: " + this.state);
       this.missionsRepository.list().subscribe(result => {
         result.forEach(r => {
           r.name = this.missionNameGenerator.generate(r.id)
         });
-        this.missions = result.filter(m => m.running === this.running);
+        this.missions = result.filter(m => m.state === this.state);
         console.log(result);
       });
     });
