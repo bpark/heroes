@@ -1,30 +1,43 @@
-from time import strftime, time
 from atexit import register
+from random import randint
+from time import strftime, time
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, escape, request, Response, json
 from flask_cors import CORS
-from random import randint
+
 from model import Hero, Mission
 
 app = Flask(__name__)
 CORS(app)
 
+# seconds
+MIN_DURATION = 30
+MAX_DURATION = 60
+EXPIRATION = 120
+
 heroes = [Hero("A" + str(x), randint(10, 100)) for x in range(5)]
 
-# seconds
-duration = randint(30 * 600, 60 * 600)
-expires = time() + randint(30 * 600, 60 * 600)
+duration = randint(MIN_DURATION, MAX_DURATION)
+# expires = time() + randint(30, 60)
+expires = int(time()) + EXPIRATION
 missions = [Mission("M" + str(x), randint(40, 100), duration, expires) for x in range(7)]
 
 
 def schedule_missions():
     print(strftime("%A, %d. %B %Y %I:%M:%S %p"))
     expired_missions = [x for x in missions if x.expires is not None and x.expires <= time()]
+    [print("expired mission: " + str(x.rid)) for x in expired_missions]
     finished_missions = [x for x in missions if x.finish is not None and x.finish <= time()]
     [missions.remove(x) for x in expired_missions]
     new_mission_len = len(expired_missions) + len(finished_missions)
-    [missions.append(Mission("M" + str(x), randint(40, 100), duration, expires)) for x in range(new_mission_len)]
+    print("new missions length: " + str(new_mission_len))
+    for x in range(new_mission_len):
+        m = Mission(name="M" + str(x),
+                    difficulty=randint(40, 100),
+                    duration=randint(MIN_DURATION, MAX_DURATION),
+                    expires=int(time()) + EXPIRATION)
+        missions.append(m)
 
 
 scheduler = BackgroundScheduler()
