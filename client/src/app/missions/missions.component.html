@@ -15,6 +15,12 @@
        [routerLink]="['/missions']"
        [queryParams]="{ state: 'Started'}">Running</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link"
+       [ngClass]="{'active': state == 'Finished'}"
+       [routerLink]="['/missions']"
+       [queryParams]="{ state: 'Finished'}">Finished</a>
+  </li>
 </ul>
 
 <table class="table table-striped" *ngIf="missions !== null">
