@@ -28,7 +28,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <ng-container *ngFor="let slot of slots">
+        <ng-container *ngFor="let slot of slots;">
           <span *ngIf="slot == null"
                 class="slot"
                 [ngClass]="{'disabled': !editable}"
@@ -36,7 +36,7 @@
           <img *ngIf="slot != null"
                class="portrait disabled"
                [ngClass]="{'disabled': !editable}"
-               src="../../assets/p0_128x128.png"
+               [src]="'../../assets/p' + slot + '_128x128.png'"
                [routerLink]="'/missions/' + mission.id + '/heroes'">
         </ng-container>
       </td>

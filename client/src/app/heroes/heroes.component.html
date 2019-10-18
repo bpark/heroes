@@ -19,7 +19,7 @@
       [ngClass]="hero.selected? 'selected' : ''">
     <ng-container *ngIf="!selectionMode || hero.missionId === null">
       <th class="label-content-table" scope="row">{{hero.id}}</th>
-      <td class="label-content-table"><img class="portrait" src="../../assets/p0_128x128.png"></td>
+      <td class="label-content-table"><img class="portrait" [src]="'../../assets/p' + hero.id + '_128x128.png'"></td>
       <td class="label-content-table">{{hero.name}}</td>
       <td class="label-content-table">{{hero.strength}}</td>
     </ng-container>

@@ -11,6 +11,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 import {FooterComponent} from './footer/footer.component';
 import {MissionComponent} from './mission/mission.component';
 import {EntityCacheService} from "./model/entity-cache.service";
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 
 const appRoutes: Routes = [
 //  { path: 'crisis-center', component: CrisisListComponent },
@@ -59,7 +60,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false} // <-- debugging purposes only
-    )
+    ),
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG
+    })
   ],
   providers: [EntityCacheService],
   bootstrap: [AppComponent]

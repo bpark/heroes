@@ -411,11 +411,20 @@ namespace NameGen {
 			if (!this.generators) {
 				return '';
 			}
-			let rnd = Math.floor(Math.random() * this.generators.length);
+			let rnd = Math.floor(Seed.random() * this.generators.length);
 			return this.generators[rnd].toString();
 		}
 
 	}
+
+	class Seed {
+    static seed = 1;
+
+    static random(): number {
+      let x = Math.sin(Seed.seed++) * 10000;
+      return x - Math.floor(x);
+    }
+  }
 
 	class Sequence extends Generator {
 		constructor(generators: Generator[]) {
