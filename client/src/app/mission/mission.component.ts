@@ -13,6 +13,7 @@ import {MissionNameGeneratorService} from "../model/missions/mission-name-genera
 export class MissionComponent implements OnInit {
 
   mission: Mission = null;
+  MissionState = MissionState;
   editable: boolean = false;
   slots: number[] = [];
 

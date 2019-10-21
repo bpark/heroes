@@ -41,6 +41,11 @@
         </ng-container>
       </td>
     </tr>
+    <tr *ngIf="mission.state === MissionState.Finished">
+      <td colspan="2">
+        Reward
+      </td>
+    </tr>
     </tbody>
   </table>
 
