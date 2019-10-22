@@ -28,11 +28,11 @@ export class AbstractRepository<T> {
   }
 
   protected createConnectionUrl(id?: number|string): string {
-    if (!environment.production) {
+    if (environment.production) {
       if (id) {
-        return 'http://localhost:5000/' + this.apiUrl + '/' + id;
+        return '/' + this.apiUrl + '/' + id;
       } else {
-        return 'http://localhost:5000/' + this.apiUrl;
+        return '/' + this.apiUrl;
       }
     } else {
       if (id) {
@@ -40,12 +40,6 @@ export class AbstractRepository<T> {
       } else {
         return 'http://localhost:5000/' + this.apiUrl;
       }
-      /*
-      if (id) {
-        return 'http://localhost:8080/api/' + this.apiUrl + '/' + id;
-      } else {
-        return 'http://localhost:8080/api/' + this.apiUrl;
-      }*/
     }
   }
 }
