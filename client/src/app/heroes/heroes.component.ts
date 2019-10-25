@@ -6,6 +6,9 @@ import {Location} from "@angular/common";
 import NameGen from "../model/namegen";
 import {ActivatedRoute} from "@angular/router";
 import {NGXLogger} from "ngx-logger";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {HttpErrorResponse} from "@angular/common/http";
+import {NetworkErrorComponent} from "../errors/network-error/network-error.component";
 
 @Component({
   selector: 'app-heroes',
@@ -21,6 +24,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
               private heroAssignmentState: HeroAssignmentStateService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
+              private ngbModal: NgbModal,
               private logger: NGXLogger) { }
 
   ngOnInit() {
@@ -32,14 +36,23 @@ export class HeroesComponent implements OnInit, OnDestroy {
     this.logger.debug("segments: ", segments);
 
     this.heroRepository.list().subscribe(result => {
-      this.heroes = result;
-      let generator = new NameGen.Generator(NameGen.FANTASY_N_L);
-      this.heroes.forEach(h => {
-        let name = generator.toString();
-        h.name = name.charAt(0).toUpperCase() + name.slice(1);
-      });
+      this.processHeroes(result);
       this.selectionMode = this.heroAssignmentState.missionId != null && segments.length > 1;
+    }, error => this.handleError(error));
+  }
+
+  private processHeroes(heroes: Hero[]): void {
+    this.heroes = heroes;
+    let generator = new NameGen.Generator(NameGen.FANTASY_N_L);
+    this.heroes.forEach(h => {
+      let name = generator.toString();
+      h.name = name.charAt(0).toUpperCase() + name.slice(1);
     });
+  }
+
+  private handleError(error: HttpErrorResponse): void {
+    this.logger.error("http error: ", error);
+    this.ngbModal.open(NetworkErrorComponent, {centered: true});
   }
 
   /**

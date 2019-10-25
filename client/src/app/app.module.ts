@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {InlineSVGModule} from "ng-inline-svg";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MissionsComponent} from './missions/missions.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './home/home.component';
@@ -12,6 +12,10 @@ import {FooterComponent} from './footer/footer.component';
 import {MissionComponent} from './mission/mission.component';
 import {EntityCacheService} from "./model/entity-cache.service";
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NetworkErrorComponent} from './errors/network-error/network-error.component';
+import {LoadingInterceptor} from "./infrastructure/loading/loading-interceptor";
+import {LoadingComponent} from './loading/loading.component';
 
 const appRoutes: Routes = [
 //  { path: 'crisis-center', component: CrisisListComponent },
@@ -51,7 +55,9 @@ const appRoutes: Routes = [
     HomeComponent,
     HeroesComponent,
     FooterComponent,
-    MissionComponent
+    MissionComponent,
+    NetworkErrorComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -63,10 +69,20 @@ const appRoutes: Routes = [
     ),
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG
-    })
+    }),
+    NgbModule
   ],
-  providers: [EntityCacheService],
-  bootstrap: [AppComponent]
+  providers: [
+    EntityCacheService,
+    NgbModal,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [NetworkErrorComponent]
 })
 export class AppModule {
 }

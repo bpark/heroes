@@ -4,6 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Mission, MissionState} from "../model/missions/missions.model";
 import {HeroAssignmentStateService} from "../model/state/hero-assignment-state.service";
 import {MissionNameGeneratorService} from "../model/missions/mission-name-generator.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {NGXLogger} from "ngx-logger";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NetworkErrorComponent} from "../errors/network-error/network-error.component";
 
 @Component({
   selector: 'app-mission',
@@ -11,6 +15,9 @@ import {MissionNameGeneratorService} from "../model/missions/mission-name-genera
   styleUrls: ['./mission.component.scss']
 })
 export class MissionComponent implements OnInit {
+
+  private static readonly idParam = "id";
+  private static readonly missionsPath = "/missions";
 
   mission: Mission = null;
   MissionState = MissionState;
@@ -21,17 +28,19 @@ export class MissionComponent implements OnInit {
               private activeRoute: ActivatedRoute,
               private heroAssignmentState: HeroAssignmentStateService,
               private router: Router,
-              private missionNameGenerator: MissionNameGeneratorService) {
+              private missionNameGenerator: MissionNameGeneratorService,
+              private ngbModal: NgbModal,
+              private logger: NGXLogger) {
   }
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
-      const id = params["id"];
+      const id = params[MissionComponent.idParam];
       if (id) {
 
         this.resetStateIfOtherMission(id);
 
-        console.log(id);
+        this.logger.debug("fetching mission: ", id);
         this.missionsRepository.get(id).subscribe(result => {
           this.mission = result;
           this.editable = this.mission.state === MissionState.Available;
@@ -42,7 +51,7 @@ export class MissionComponent implements OnInit {
           this.assignHeroesToMission();
           this.assignHeroesToSlots();
 
-        });
+        }, (error: HttpErrorResponse) => this.handleError(error));
       }
     });
   }
@@ -50,10 +59,15 @@ export class MissionComponent implements OnInit {
   start(): void {
     this.missionsRepository.startMission(this.mission.id, this.heroAssignmentState.heroIds).subscribe(
       success => {
-        const extras = {queryParams: {'state': MissionState.Available}};
-        this.router.navigate(['/missions'], extras).then()
-      }
+        const extras = {queryParams: {state: MissionState.Available}};
+        this.router.navigate([MissionComponent.missionsPath], extras).then()
+      }, error => this.handleError(error)
     );
+  }
+
+  private handleError(error: HttpErrorResponse): void {
+    this.logger.error("http error: ", error);
+    this.ngbModal.open(NetworkErrorComponent, {centered: true});
   }
 
   private resetStateIfOtherMission(missionId: number): void {
