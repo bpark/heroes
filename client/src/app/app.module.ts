@@ -16,6 +16,7 @@ import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NetworkErrorComponent} from './errors/network-error/network-error.component';
 import {LoadingInterceptor} from "./infrastructure/loading/loading-interceptor";
 import {LoadingComponent} from './loading/loading.component';
+import {HeaderComponent} from './header/header.component';
 
 const appRoutes: Routes = [
 //  { path: 'crisis-center', component: CrisisListComponent },
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     FooterComponent,
     MissionComponent,
     NetworkErrorComponent,
-    LoadingComponent
+    LoadingComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

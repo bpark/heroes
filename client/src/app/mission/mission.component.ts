@@ -23,6 +23,7 @@ export class MissionComponent implements OnInit {
   MissionState = MissionState;
   editable: boolean = false;
   slots: number[] = [];
+  loots = [false, false, false];
 
   constructor(private missionsRepository: MissionsRepositoryService,
               private activeRoute: ActivatedRoute,
@@ -65,6 +66,11 @@ export class MissionComponent implements OnInit {
     );
   }
 
+  openLoot(id: number): void {
+    this.logger.info("changing to true for: ", id);
+    this.loots[id] = true;
+  }
+
   private handleError(error: HttpErrorResponse): void {
     this.logger.error("http error: ", error);
     this.ngbModal.open(NetworkErrorComponent, {centered: true});
@@ -89,4 +95,5 @@ export class MissionComponent implements OnInit {
       this.slots.push(null);
     }
   }
+
 }

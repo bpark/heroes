@@ -1,14 +1,10 @@
+<app-header></app-header>
+
 <main role="main" class="container" *ngIf="mission !== null">
 
   <h4>{{mission.name}}</h4>
 
   <table class="table table-full">
-    <!-- <thead>
-     <tr>
-       <th class="label-table" scope="col">Id</th>
-       <th class="label-table" scope="col">Name</th>
-     </tr>
-     </thead>-->
     <tbody>
     <tr>
       <th class="label-table" scope="row">Name</th>
@@ -28,7 +24,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <ng-container *ngFor="let slot of slots;">
+        <ng-container *ngFor="let slot of slots">
           <span *ngIf="slot == null"
                 class="slot"
                 [ngClass]="{'disabled': !editable}"
@@ -43,7 +39,10 @@
     </tr>
     <tr *ngIf="mission.state === MissionState.Finished">
       <td colspan="2">
-        Reward
+        <div *ngFor="let loot of loots; let i = index">
+          <img *ngIf="loot === true" class="loot disabled" [src]="'./assets/2561.png'">
+          <img *ngIf="loot === false" class="loot" [src]="'./assets/3199.png'" (click)="openLoot(i)">
+        </div>
       </td>
     </tr>
     </tbody>

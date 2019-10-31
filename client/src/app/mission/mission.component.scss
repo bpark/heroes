@@ -30,6 +30,19 @@
   box-shadow: 0 4px 8px 0 rgba(91, 29, 17, 0.2), 0 6px 20px 0 rgba(91, 29, 17, 0.19);
 }
 
+.loot {
+  //display: inline-flex;
+  width: 3.4rem;
+  float: left;
+  height: 3.4rem;
+  margin: .25rem;
+  border-color: rgb(238, 190, 71);
+  border-width: 2px;
+  border-style: solid;
+  background-color: #0f0f0f;
+  box-shadow: 0 4px 8px 0 rgba(238, 214, 139, 0.7), 0 6px 20px 0 rgba(238, 237, 101, 0.9);
+}
+
 .portrait:hover {
   box-shadow: 0 4px 8px 0 rgba(235, 222, 194, 0.2), 0 6px 20px 0 rgba(235, 222, 194, 0.19);
 }
