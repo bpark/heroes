@@ -71,6 +71,12 @@ export class MissionComponent implements OnInit {
     this.loots[id] = true;
   }
 
+  looted(): boolean {
+    let l = true;
+    this.loots.forEach(loot => l = l && loot);
+    return l;
+  }
+
   private handleError(error: HttpErrorResponse): void {
     this.logger.error("http error: ", error);
     this.ngbModal.open(NetworkErrorComponent, {centered: true});

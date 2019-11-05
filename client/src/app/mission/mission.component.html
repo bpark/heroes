@@ -49,6 +49,7 @@
   </table>
 
   <button *ngIf="editable" type="button" class="btn btn-warning" (click)="start()">Start</button>
+  <button *ngIf="mission.state === MissionState.Finished" type="button" class="btn btn-warning" (click)="start()" [disabled]="!looted()">Ok</button>
 
 </main>
 
